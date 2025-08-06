@@ -7,7 +7,7 @@ module.exports = app => {
     router.get("/", peliculas.findAll);
 
     router.get("/:id", peliculas.findOne);
-    router.get("/nombre/:nombre", peliculas.findOne);
+   
 
    
     router.put("/update/:id", peliculas.update);
