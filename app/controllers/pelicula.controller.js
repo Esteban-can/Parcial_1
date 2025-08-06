@@ -62,23 +62,7 @@ exports.findOne = (req, res) => {
         });
 };
 
-exports.findOne = (req, res) => {
-    const nombre = req.params.nombre;
 
-    Pelicula.findOne({ where: { nombre: nombre } })
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({ message: `No se encontró la película con el nombre=${nombre}` });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error al obtener la película con el nombre=" + nombre
-            });
-        });
-};
 
 exports.update = (req, res) => {
     const id = req.params.id;
