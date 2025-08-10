@@ -71,7 +71,7 @@ exports.findOneByTitulo = (req, res) => {
 
     Pelicula.findOne({
         where: {
-            titulo: {
+            nombre: {
                 [Op.like]: nombre // Para MySQL / SQLite
                 // [Op.iLike]: titulo // Para Postgres
             }
@@ -82,13 +82,13 @@ exports.findOneByTitulo = (req, res) => {
                 res.send(data);
             } else {
                 res.status(404).send({
-                    message: `No se encontró la canción con título=${nombre}`
+                    message: `No se encontró la pelicula con el nombre=${nombre}`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error al obtener la canción con título=" + nombre
+                message: "Error al obtener la pelicula con el nombre=" + nombre
             });
         });
 };
