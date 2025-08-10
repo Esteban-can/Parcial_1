@@ -44,7 +44,8 @@ exports.findAll = (req, res) => {
 };
 
 
-exports.findOne = (req, res) => {
+// Buscar por ID
+exports.findOneById = (req, res) => {
     const id = req.params.id;
 
     Pelicula.findByPk(id)
@@ -52,7 +53,9 @@ exports.findOne = (req, res) => {
             if (data) {
                 res.send(data);
             } else {
-                res.status(404).send({ message: `No se encontró la pelicula con id=${id}` });
+                res.status(404).send({
+                    message: `No se encontró la pelicula con id=${id}`
+                });
             }
         })
         .catch(err => {
@@ -62,6 +65,33 @@ exports.findOne = (req, res) => {
         });
 };
 
+// Buscar por título (ignora mayúsculas/minúsculas)
+exports.findOneByTitulo = (req, res) => {
+    const nombre = req.params.nombre;
+
+    Pelicula.findOne({
+        where: {
+            titulo: {
+                [Op.like]: nombre // Para MySQL / SQLite
+                // [Op.iLike]: titulo // Para Postgres
+            }
+        }
+    })
+        .then(data => {
+            if (data) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: `No se encontró la canción con título=${nombre}`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error al obtener la canción con título=" + nombre
+            });
+        });
+};
 
 
 exports.update = (req, res) => {
