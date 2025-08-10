@@ -66,7 +66,7 @@ exports.findOneById = (req, res) => {
 };
 
 // Buscar por título (ignora mayúsculas/minúsculas)
-exports.findOneByTitulo = (req, res) => {
+exports.findOneByNombre = (req, res) => {
     const nombre = req.params.nombre;
 
     Pelicula.findOne({
